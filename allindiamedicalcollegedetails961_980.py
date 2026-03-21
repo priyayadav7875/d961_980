@@ -377,12 +377,14 @@ def scrape_college_info(driver,URLS):
 
     for item in data["college_info"]["highlights"]["table"]:
         print(f"  - {item['particular']}: {item['details'][:50]}...")
-
-    wait.until(
-        EC.presence_of_element_located(
-            (By.ID, "ovp_section_popular_courses")
+    try:
+        wait.until(
+            EC.presence_of_element_located(
+                (By.ID, "ovp_section_popular_courses")
+            )
         )
-    )
+    except:
+        pass
 
     # ================= INTRO / SUMMARY =================
     data["intro"] = driver.execute_script("""
